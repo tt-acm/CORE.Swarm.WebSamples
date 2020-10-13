@@ -1,0 +1,25 @@
+{
+  "name": "CORE.Swarm.WebSamples",
+  "version": "1.0.0",
+  "description": "SDK samples showing how to call into the external Swarm Compute API from a node.js app.",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tt-acm/CORE.Swarm.WebSamples.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tt-acm/CORE.Swarm.WebSamples/issues"
+  },
+  "homepage": "https://github.com/tt-acm/CORE.Swarm.WebSamples#readme",
+  "dependencies": {
+    "@ttcorestudio/swarm": "0.0.27",
+    "axios": "^0.20.0",
+    "express": "^4.17.1"
+  }
+}
