@@ -12,14 +12,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "",
   "bugs": {
     "url": "https://github.com/tt-acm/CORE.Swarm.WebSamples/issues"
   },
   "homepage": "https://github.com/tt-acm/CORE.Swarm.WebSamples#readme",
   "dependencies": {
-    "@ttcorestudio/swarm": "0.0.27",
-    "axios": "^0.20.0",
-    "express": "^4.17.1"
+    "@ttcorestudio/swarm": "0.0.28"
   }
 }
