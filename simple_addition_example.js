@@ -1,12 +1,12 @@
+// This example simplify adds two numbers together
+
 var Swarm = require('@ttcorestudio/swarm');
-
 var swarmApp = new Swarm();
-// Set Document unit and tolerance
-swarmApp.setDocument(8, 0.001);
+swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
-// Construct a input object, add it into an array, and do swarmApp.inputs = [inputs]
+swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDIxMjY3NDI3MTMsInByb2plY3RJZCI6IjVmN2U4MDg0NzQ4MWU0MDAwNDg5YWFlZiJ9.Zmhz1R1arizYuF_RGuwRcQyLb9jPjYx3zRF4BDGVygo";
+
 // Add values to inputs
-
 swarmApp.addInput({
   type: "Number",
   name: "A",
@@ -23,9 +23,8 @@ swarmApp.addInput({
   }]
 });
 
-swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDIxMjY3NDI3MTMsInByb2plY3RJZCI6IjVmN2U4MDg0NzQ4MWU0MDAwNDg5YWFlZiJ9.Zmhz1R1arizYuF_RGuwRcQyLb9jPjYx3zRF4BDGVygo";
-
-swarmApp.callIntoSwarm().then(val => {
+// Sending to Swarm for compute
+swarmApp.compute().then(val => {
   // console.log("asynchronous logging has val:",val);
 
   val.forEach(v=>{
