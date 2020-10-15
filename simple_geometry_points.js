@@ -13,13 +13,13 @@ rhino3dm().then((rhino) => {
 
 
   // Create Inputs
-  pointA = {
+  let pointA = {
     X: 18.9,
     Y: -22.5,
     Z: 2.9
   };
 
-  pointB = {
+  let pointB = {
     X: 11.2,
     Y: -2.55,
     Z: 12.9
@@ -30,7 +30,6 @@ rhino3dm().then((rhino) => {
     type: "Point",
     name: "Pt",
     values: [pointA, pointB],
-    ReferencedGeometry: [pointA, pointB]
   });
 
   swarmApp.addInput({
