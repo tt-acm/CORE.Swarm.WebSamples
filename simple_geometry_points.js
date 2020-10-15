@@ -39,7 +39,6 @@ rhino3dm().then((rhino) => {
 
 
   swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDI3Njk0MzU2NzksInByb2plY3RJZCI6IjVmODg0ZTRlNzE1NmZkMDAwNGVjZDRiZSJ9._yWufgzymdHhZA8hdyRIffYb8Pgz9U8Sa6GFSYO4X1c";
-  // swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDIxNjYwNzAwMTIsInByb2plY3RJZCI6IjVmN2YxNjA0NjY1YzYzMDAwNDliNTY1YiJ9.B_H-90KJ3qmEAyCvT0Jse8hQDodkZIK6FUKPp3cJVwY";
 
   swarmApp.callIntoSwarm().then(val => {
     // console.log("asynchronous logging has val:",val);
