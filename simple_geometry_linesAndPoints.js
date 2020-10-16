@@ -36,7 +36,23 @@ rhino3dm().then((rhino) => {
     values: [lineA.toPolylineCurve().encode(), lineB.toPolylineCurve().encode()]
   });
 
+
   //Input 2 - a list of points
+  let pointA = { X:0.0, Y:0.0, Z:0.0 };
+  let pointB = { X:0.0, Y:0.0, Z:10.0 };
+  swarmApp.addInput({
+    type: "Point",
+    name: "Levels",
+    values: [pointA, pointB]
+  });
+
+
+  //Input 3 - single tolerance value
+  swarmApp.addInput({
+    type: "Number",
+    name: "Tolerance",
+    values: [ { Value:3.14 } ]
+  })
 
 
   swarmApp.compute().then(val => {
