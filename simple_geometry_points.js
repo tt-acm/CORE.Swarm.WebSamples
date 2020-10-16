@@ -44,7 +44,6 @@ rhino3dm().then((rhino) => {
   });
 
   swarmApp.compute().then(val => {
-    // console.log("asynchronous logging has val:",val);
 
     val.forEach(v=>{
       console.log("Output Name: ", v.name);
