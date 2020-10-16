@@ -36,8 +36,13 @@ As stated above, one of the main goals here is to provide a development environm
 
 ### Links: background reading that infromed this process 
 [https://medium.com/@AidThompsin/how-to-npm-link-to-a-local-version-of-your-dependency-84e82126667a](https://medium.com/@AidThompsin/how-to-npm-link-to-a-local-version-of-your-dependency-84e82126667a)
+
 [https://dev.to/erinbush/npm-linking-and-unlinking-2h1g](https://dev.to/erinbush/npm-linking-and-unlinking-2h1g)
+
 [https://docs.npmjs.com/cli/link](https://docs.npmjs.com/cli/link)
+
 [https://stackoverflow.com/questions/24933955/easy-way-to-list-node-modules-i-have-npm-linked](https://stackoverflow.com/questions/24933955/easy-way-to-list-node-modules-i-have-npm-linked)
+
 [https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27](https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27)
+
 [https://nodejs.org/en/docs/guides/debugging-getting-started/](https://nodejs.org/en/docs/guides/debugging-getting-started/)
