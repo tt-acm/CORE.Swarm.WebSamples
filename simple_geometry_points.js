@@ -30,7 +30,7 @@ rhino3dm().then((rhino) => {
     type: "Point",
     name: "Pt",
     values: [
-      { Value: pointA }, 
+      { Value: pointA },
       { Value: pointB }
     ]
   });
@@ -45,7 +45,7 @@ rhino3dm().then((rhino) => {
 
   swarmApp.compute().then(val => {
 
-    val.forEach(v=>{
+    val.forEach(v => {
       console.log("Output Name: ", v.name);
       console.log("Output Value: ", v.outputValue);
     })

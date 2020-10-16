@@ -19,19 +19,19 @@ rhino3dm().then((rhino) => {
 
   // Create Inputs
   let lineA = new rhino.Polyline(2); // Set number of edge points
-  lineA.add(18.9,-22.5,2.9);
-  lineA.add(14.5,19.2,0);
+  lineA.add(18.9, -22.5, 2.9);
+  lineA.add(14.5, 19.2, 0);
 
   // Add Inputs
   swarmApp.addInput({
     type: "Curve",
     name: "Crv",
-    values: [ { Value: lineA.toNurbsCurve().encode() } ]
+    values: [{ Value: lineA.toNurbsCurve().encode() }]
   });
 
   console.log("Inputs are set.  Running compute...")
   swarmApp.compute().then(val => {
-    
+
     console.log("Compute returned results!  Unpacking outputs...")
 
     //we know the results for this App are a single curve output parameter, containing a single item

@@ -16,8 +16,8 @@ console.log("Starting...")
 rhino3dm().then((rhino) => {
 
   console.log("Rhino3dm has loaded.  Constructing inputs...")
-  
- //construct a new Swarm object
+
+  //construct a new Swarm object
   var swarmApp = new Swarm();
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
@@ -27,12 +27,12 @@ rhino3dm().then((rhino) => {
 
   // Input 1 - a list of lines 
   let lineA = new rhino.Polyline(2); // Set number of edge points
-  lineA.add(18.9,-22.5,2.9);
-  lineA.add(14.5,19.2,0);
+  lineA.add(18.9, -22.5, 2.9);
+  lineA.add(14.5, 19.2, 0);
 
   let lineB = new rhino.Polyline(2); // Set number of edge points
-  lineB.add(18.9,-24.5,2.9);
-  lineB.add(19.5,17.2,0);
+  lineB.add(18.9, -24.5, 2.9);
+  lineB.add(19.5, 17.2, 0);
 
   // Add Input to app
   // note that a list of values is being passed into this single input, and that each input item can have both a value and a dictionary of key/value attributes
@@ -40,24 +40,24 @@ rhino3dm().then((rhino) => {
     type: "Curve",
     name: "FramingIn",
     values: [
-      { 
+      {
         Value: lineA.toNurbsCurve().encode(),
         customAttributes: {
           "konstruId": "112358"
-        } 
-      }, 
-      { 
+        }
+      },
+      {
         Value: lineB.toNurbsCurve().encode(),
         customAttributes: {
           "konstruId": "13213455"
         }
-      } 
+      }
     ]
   });
 
 
   //Input 2 - a list of points
-  let pointA = { X:0.0, Y:0.0, Z:0.0 };
+  let pointA = { X: 0.0, Y: 0.0, Z: 0.0 };
   swarmApp.addInput({
     type: "Point",
     name: "Levels",
@@ -71,7 +71,7 @@ rhino3dm().then((rhino) => {
   swarmApp.addInput({
     type: "Number",
     name: "Tolerance",
-    values: [ { Value:5.0 } ]
+    values: [{ Value: 5.0 }]
   })
 
   console.log("Inputs are set.  Running compute...")
