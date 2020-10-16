@@ -25,7 +25,7 @@ As stated above, one of the main goals here is to provide a development environm
 3. In Chrome, go to `chrome://inspect`, and look for the inspect link to your file in the list of remote targets.  Click in to launch the chrome debugger, set some breakpoints, and have at it!
 
 ### Step 3: Unlink local package
-1. Run `npm unlink --no-save @ttcorestudio\swarm` in a terminal at the `CORE.Swarm.WebSamples` project root directory.
+1. Run `npm unlink --no-save @ttcorestudio/swarm` in a terminal at the `CORE.Swarm.WebSamples` project root directory.
 2. Run `npm unlink` in a terminal at the `CORE.Swarm.jspkg` project root directory.
 3. Verify the symbolic link has been removed by running `ls -l node_modules | grep ^l` in a terminal at the `CORE.Swarm.WebSamples` project root directory.  If this returns any results, try manually deleting the package in vs code, and repeating step 2 above.
 
