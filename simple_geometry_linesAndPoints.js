@@ -12,7 +12,12 @@ var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
 
 // Rhino needs to load up first before using.
+console.log("Starting...")
 rhino3dm().then((rhino) => {
+
+  console.log("Rhino3dm has loaded.  Constructing inputs...")
+  
+ //construct a new Swarm object
   var swarmApp = new Swarm();
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
@@ -53,13 +58,11 @@ rhino3dm().then((rhino) => {
 
   //Input 2 - a list of points
   let pointA = { X:0.0, Y:0.0, Z:0.0 };
-  let pointB = { X:0.0, Y:0.0, Z:10.0 };
   swarmApp.addInput({
     type: "Point",
     name: "Levels",
     values: [
-      { Value: pointA }, 
-      { Value: pointB }
+      { Value: pointA }
     ]
   });
 
@@ -68,24 +71,32 @@ rhino3dm().then((rhino) => {
   swarmApp.addInput({
     type: "Number",
     name: "Tolerance",
-    values: [ { Value:3.14 } ]
+    values: [ { Value:5.0 } ]
   })
 
+  console.log("Inputs are set.  Running compute...")
 
+  //the actual compute call.  The val coming back in the promise is the collection of all Swarm App Outputs
   swarmApp.compute().then(val => {
-    // console.log("asynchronous logging has val:",val);
 
-    val.forEach(v=>{
-      console.log("Output Name: ", v.name);
-      console.log("Output Value: ", v.outputValue);
+    console.log("Compute returned results!  Unpacking outputs...")
 
-      v.outputValue.forEach(el => {
-        console.log("JSON.parse(el.data)", JSON.parse(el.data));
-        let decoded = rhino.CommonObject.decode(JSON.parse(el.data));
+    //we know the results of this App are a single output containing 2 curves, whose end points might have been sucked to a level depending on the tolerance set above.
 
-        console.log("decoded", typeof(decoded)); // not sure what to do with this decoded geometry
-      })
-    })
+    //the code below shows how to get at the geometry and attributes coming back from the Swarm Server in an Output
+
+    //first curve and its attributes
+    var resultCurve1RawObject = JSON.parse(val[0].outputValue[0].data);
+    var resultCurve1Attributes = val[0].outputValue[0].attributes.UserDictionary;
+
+    //decode that curve object into the proper rhino3dm type you are expecting
+    var resultRhinoCurve1 = rhino.CommonObject.decode(resultCurve1RawObject);
+
+    //now you can do whatever with the results --- its a nurbs curve!
+    console.log("Adjusted Start Point on Output Curve 1", resultRhinoCurve1.pointAt(0.0));
+    console.log("Adjusted Start Point on Output Curve 1", resultRhinoCurve1.pointAt(1.0));
+    //attributes, too
+    console.log("Adjusted Curve 1 custom attributes", resultCurve1Attributes);
+
   });
-
 });
