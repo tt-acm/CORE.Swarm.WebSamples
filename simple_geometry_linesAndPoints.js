@@ -43,7 +43,10 @@ rhino3dm().then((rhino) => {
   swarmApp.addInput({
     type: "Point",
     name: "Levels",
-    values: [pointA, pointB]
+    values: [
+      { Value: pointA }, 
+      { Value: pointB }
+    ]
   });
 
 

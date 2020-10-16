@@ -29,7 +29,10 @@ rhino3dm().then((rhino) => {
   swarmApp.addInput({
     type: "Point",
     name: "Pt",
-    values: [pointA, pointB],
+    values: [
+      { Value: pointA }, 
+      { Value: pointB }
+    ]
   });
 
   swarmApp.addInput({
