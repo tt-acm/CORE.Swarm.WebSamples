@@ -1,9 +1,10 @@
 // This example performs a framing repair - like operation on a list of lines.
 // It pulls frames to their nearest level within a tolerance.
-// 
-// The goal with this example is to demonstrate how to pass lists of values to an Input, and how to dig into data trees coming back as Outputs.
 //
-// Link to this Swarm App: https://dev-swarm.herokuapp.com/app/5f7f1604665c6300049b565b/info
+// Link to the Swarm App: https://dev-swarm.herokuapp.com/app/5f7f1604665c6300049b565b/info
+// 
+// The goal with this example is to demonstrate how to pass lists of values in Inputs (including values with custom attributes set), and how to dig into the results data trees coming back as Outputs.
+
 
 
 //reference Swarm and Rhino packages
@@ -29,13 +30,23 @@ rhino3dm().then((rhino) => {
   lineB.add(19.5,17.2,0);
 
   // Add Input to app
-  // note that a list of values is being passed into this single input
+  // note that a list of values is being passed into this single input, and that each input item can have both a value and a dictionary of key/value attributes
   swarmApp.addInput({
     type: "Curve",
     name: "FramingIn",
     values: [
-      { Value: lineA.toNurbsCurve().encode() }, 
-      { Value: lineB.toNurbsCurve().encode() } 
+      { 
+        Value: lineA.toNurbsCurve().encode(),
+        customAttributes: {
+          "konstruId": "112358"
+        } 
+      }, 
+      { 
+        Value: lineB.toNurbsCurve().encode(),
+        customAttributes: {
+          "konstruId": "13213455"
+        }
+      } 
     ]
   });
 
