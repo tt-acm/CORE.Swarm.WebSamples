@@ -34,8 +34,8 @@ rhino3dm().then((rhino) => {
     type: "Curve",
     name: "FramingIn",
     values: [
-      { Value: lineA.toPolylineCurve().encode() }, 
-      { Value: lineB.toPolylineCurve().encode() } 
+      { Value: lineA.toNurbsCurve().encode() }, 
+      { Value: lineB.toNurbsCurve().encode() } 
     ]
   });
 
