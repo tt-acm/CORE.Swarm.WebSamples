@@ -33,7 +33,10 @@ rhino3dm().then((rhino) => {
   swarmApp.addInput({
     type: "Curve",
     name: "FramingIn",
-    values: [lineA.toPolylineCurve().encode(), lineB.toPolylineCurve().encode()]
+    values: [
+      { Value: lineA.toPolylineCurve().encode() }, 
+      { Value: lineB.toPolylineCurve().encode() } 
+    ]
   });
 
 

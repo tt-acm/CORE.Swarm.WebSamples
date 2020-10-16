@@ -21,7 +21,7 @@ rhino3dm().then((rhino) => {
   swarmApp.addInput({
     type: "Curve",
     name: "Crv",
-    values: [lineA.toPolylineCurve().encode()]
+    values: [ { Value: lineA.toPolylineCurve().encode() } ]
   });
 
 
