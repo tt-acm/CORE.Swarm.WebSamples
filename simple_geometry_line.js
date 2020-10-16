@@ -4,7 +4,12 @@ var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
 
 // Rhino needs to load up first before using.
+console.log("Starting...")
 rhino3dm().then((rhino) => {
+
+  console.log("Rhino3dm has loaded.  Constructing inputs...")
+
+  //construct a new Swarm object
   var swarmApp = new Swarm();
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
@@ -21,24 +26,26 @@ rhino3dm().then((rhino) => {
   swarmApp.addInput({
     type: "Curve",
     name: "Crv",
-    values: [lineA.toPolylineCurve().encode()]
+    values: [ { Value: lineA.toNurbsCurve().encode() } ]
   });
 
-
+  console.log("Inputs are set.  Running compute...")
   swarmApp.compute().then(val => {
-    // console.log("asynchronous logging has val:",val);
+    
+    console.log("Compute returned results!  Unpacking outputs...")
 
-    val.forEach(v=>{
-      console.log("Output Name: ", v.name);
-      console.log("Output Value: ", v.outputValue);
+    //we know the results for this App are a single curve output parameter, containing a single item
+    //start by parsing the raw json that comes back in the compute response
+    var resultCurveRawObject = JSON.parse(val[0].outputValue[0].data);
 
-      v.outputValue.forEach(el => {
-        console.log("JSON.parse(el.data)", JSON.parse(el.data));
-        let decoded = rhino.CommonObject.decode(JSON.parse(el.data));
+    //then decode that object into the proper rhino3dm type you are expecting
+    var resultRhinoCurve = rhino.CommonObject.decode(resultCurveRawObject);
+    console.log("Output Curve:", resultRhinoCurve);
 
-        console.log("decoded", typeof(decoded)); // not sure what to do with this decoded geometry
-      })
-    })
+    //now you can do whatever with the results --- its a nurbs curve!
+    console.log("Point on Output Curve at t=0", resultRhinoCurve.pointAt(0.0));
+    console.log("Point on Output Curve at t=0.5", resultRhinoCurve.pointAt(0.5));
+    console.log("Point on Output Curve at t=1", resultRhinoCurve.pointAt(1.0));
   });
 
 });

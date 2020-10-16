@@ -29,7 +29,10 @@ rhino3dm().then((rhino) => {
   swarmApp.addInput({
     type: "Point",
     name: "Pt",
-    values: [pointA, pointB],
+    values: [
+      { Value: pointA }, 
+      { Value: pointB }
+    ]
   });
 
   swarmApp.addInput({
@@ -41,7 +44,6 @@ rhino3dm().then((rhino) => {
   });
 
   swarmApp.compute().then(val => {
-    // console.log("asynchronous logging has val:",val);
 
     val.forEach(v=>{
       console.log("Output Name: ", v.name);
