@@ -14,7 +14,7 @@ rhino3dm().then((rhino) => {
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
-  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDI4Nzg4Mzk4NzcsInByb2plY3RJZCI6IjVmODlmYzkzNmQ0ZDU1MDAwNDNmNTI0MSJ9.0d2BDbfmGCjG7C-W2l2mvCS7xGDjOvW7NlMt2YkXOlA";
+  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDI5NTcyOTQ0NTEsImV4cCI6MTYwMjk2MjQ3ODQ1MSwicHJvamVjdElkIjoiNWY4OWZjOTM2ZDRkNTUwMDA0M2Y1MjQxIn0.hCSNz0vKo1PfrClug6y7oZz9iGpgV3kE3AGlAH2hV9w";
 
 
   // Create Inputs
