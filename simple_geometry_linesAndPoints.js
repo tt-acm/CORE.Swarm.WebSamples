@@ -22,7 +22,7 @@ rhino3dm().then((rhino) => {
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
-  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDIxNjYwNzAwMTIsInByb2plY3RJZCI6IjVmN2YxNjA0NjY1YzYzMDAwNDliNTY1YiJ9.B_H-90KJ3qmEAyCvT0Jse8hQDodkZIK6FUKPp3cJVwY";
+  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM5MjA4OTgxNzcsImV4cCI6MTYwMzkyNjA4MjE3NywicHJvamVjdElkIjoiNWY5OTg1YTdkZDZkNzEwMDA0YzM4ZDczIn0.q5EX8MlDMcBvN86CNPbTohF_vghc88AHBdsu2UfRN5M";
 
 
   // Input 1 - a list of lines 
