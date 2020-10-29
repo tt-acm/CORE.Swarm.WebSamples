@@ -81,6 +81,12 @@ rhino3dm().then((rhino) => {
 
     console.log("Compute returned results!  Unpacking outputs...")
 
+    //check for nulls in the outputValues - if an output isn't populated during a compute, this will be null
+    if(val[0].outputValue === null ){
+      console.log("Compute returned null; bailing out.");
+      return;
+    }
+
     //we know the results of this App are a single output containing 2 curves, whose end points might have been sucked to a level depending on the tolerance set above.
 
     //the code below shows how to get at the geometry and attributes coming back from the Swarm Server in an Output
