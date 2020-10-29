@@ -1,5 +1,5 @@
 // This example creates contours of a brep vertically
-// Link to this Swarm App: https://dev-swarm.herokuapp.com/app/5f89fc936d4d5500043f5241/info
+// Link to this Swarm App: https://swarm.thorntontomasetti.com/app/5f99ec4c5747d50004179d9d/info
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
 const fs = require('fs');
@@ -16,7 +16,7 @@ rhino3dm().then(async function(rhino) {
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
-  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDI5NTk0MDcwODcsImV4cCI6MTYwMjk2NDU5MTA4NywicHJvamVjdElkIjoiNWY4YjM4MGJiZDNhMDIwMDA0NjEzODVlIn0.8u5s7IaajIT2r5IWer9177gZA5XwygVuupaKhTTDEXM";
+  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM5MjMyNDIwNzksImV4cCI6MTYwMzkyODQyNjA3OSwicHJvamVjdElkIjoiNWY5OWVjNGM1NzQ3ZDUwMDA0MTc5ZDlkIn0.8lQYnI9R-NEQZc_OfSKFuBi5i8K4QjYLj1ioOCl8Pfw";
 
   let buffer = fs.readFileSync(file3dmpath);
   let arr = new Uint8Array(buffer);

@@ -1,5 +1,5 @@
 // This example uses moves the input line for a short distance
-// Link to this Swarm App: https://dev-swarm.herokuapp.com/app/5f88e3de95d9e90004524a50/info
+// Link to this Swarm App: https://swarm.thorntontomasetti.com/app/5f99ec325747d50004179d88/info
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
 
@@ -14,7 +14,7 @@ rhino3dm().then((rhino) => {
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
-  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDI4MDY3OTY0MzcsInByb2plY3RJZCI6IjVmODhlM2RlOTVkOWU5MDAwNDUyNGE1MCJ9.crh_xVZpBscmJPIUyCj_aog99BP4hilbkImcUcO0Wgk";
+  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM5MjMxOTY2NzgsImV4cCI6MTYwMzkyODM4MDY3OCwicHJvamVjdElkIjoiNWY5OWVjMzI1NzQ3ZDUwMDA0MTc5ZDg4In0.44TwLr6y0AHLNQlLutLpXnz9kWqWJTBHulPweJb5d4k";
 
 
   // Create Inputs

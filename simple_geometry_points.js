@@ -1,5 +1,5 @@
 // This example uses a point and a double as inputs and returns a curve back
-// Link to this Swarm App: https://dev-swarm.herokuapp.com/app/5f884e4e7156fd0004ecd4be/info
+// Link to this Swarm App: https://swarm.thorntontomasetti.com/app/5f99ec6d5747d50004179db4/info
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
 
@@ -9,7 +9,7 @@ rhino3dm().then((rhino) => {
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
-  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDI3Njk0MzU2NzksInByb2plY3RJZCI6IjVmODg0ZTRlNzE1NmZkMDAwNGVjZDRiZSJ9._yWufgzymdHhZA8hdyRIffYb8Pgz9U8Sa6GFSYO4X1c";
+  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM5MjMzMDkyNzAsImV4cCI6MTYwMzkyODQ5MzI3MCwicHJvamVjdElkIjoiNWY5OWVjNmQ1NzQ3ZDUwMDA0MTc5ZGI0In0.maF1xxW9d9C7fcBtILYn1lGzJ_vCUeNls5IptEXC9ak";
 
 
   // Create Inputs

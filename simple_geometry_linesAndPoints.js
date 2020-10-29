@@ -1,7 +1,7 @@
 // This example performs a framing repair - like operation on a list of lines.
 // It pulls frames to their nearest level within a tolerance.
 //
-// Link to the Swarm App: https://dev-swarm.herokuapp.com/app/5f7f1604665c6300049b565b/info
+// Link to the Swarm App: https://swarm.thorntontomasetti.com/app/5f9985a7dd6d710004c38d73/info
 // 
 // The goal with this example is to demonstrate how to pass lists of values in Inputs (including values with custom attributes set), and how to dig into the results data trees coming back as Outputs.
 
@@ -22,7 +22,7 @@ rhino3dm().then((rhino) => {
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
-  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDIxNjYwNzAwMTIsInByb2plY3RJZCI6IjVmN2YxNjA0NjY1YzYzMDAwNDliNTY1YiJ9.B_H-90KJ3qmEAyCvT0Jse8hQDodkZIK6FUKPp3cJVwY";
+  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM5MjA4OTgxNzcsImV4cCI6MTYwMzkyNjA4MjE3NywicHJvamVjdElkIjoiNWY5OTg1YTdkZDZkNzEwMDA0YzM4ZDczIn0.q5EX8MlDMcBvN86CNPbTohF_vghc88AHBdsu2UfRN5M";
 
 
   // Input 1 - a list of lines 
@@ -80,6 +80,12 @@ rhino3dm().then((rhino) => {
   swarmApp.compute().then(val => {
 
     console.log("Compute returned results!  Unpacking outputs...")
+
+    //check for nulls in the outputValues - if an output isn't populated during a compute, this will be null
+    if(val[0].outputValue === null ){
+      console.log("Compute returned null; bailing out.");
+      return;
+    }
 
     //we know the results of this App are a single output containing 2 curves, whose end points might have been sucked to a level depending on the tolerance set above.
 

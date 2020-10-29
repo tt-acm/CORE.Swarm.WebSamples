@@ -1,5 +1,5 @@
 // This example creates contours of a brep vertically
-// Link to this Swarm App: https://dev-swarm.herokuapp.com/app/5f89fc936d4d5500043f5241/info
+// Link to this Swarm App: https://swarm.thorntontomasetti.com/app/5f99ec185747d50004179d71/info
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
 
@@ -14,7 +14,7 @@ rhino3dm().then((rhino) => {
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
-  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDI5NTcyOTQ0NTEsImV4cCI6MTYwMjk2MjQ3ODQ1MSwicHJvamVjdElkIjoiNWY4OWZjOTM2ZDRkNTUwMDA0M2Y1MjQxIn0.hCSNz0vKo1PfrClug6y7oZz9iGpgV3kE3AGlAH2hV9w";
+  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM5MjMxMDA1NjksImV4cCI6MTYwMzkyODI4NDU2OSwicHJvamVjdElkIjoiNWY5OWVjMTg1NzQ3ZDUwMDA0MTc5ZDcxIn0.gg4os0IWlP8ilJZ5Y8GX9XdnQDmksJFrIL_ZfLig4_I";
 
 
   // Create Inputs
