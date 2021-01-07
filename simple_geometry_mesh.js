@@ -41,9 +41,11 @@ rhino3dm().then(async function(rhino) {
 
 
   console.log("Inputs are set.  Running compute...")
-  swarmApp.compute().then(val => {
+  swarmApp.compute().then(output => {
 
     console.log("Compute returned results!  Unpacking outputs...")
+
+    let val = output.outputList;
 
     //we know the results for this App is a single output that returns an array of points
     //start by parsing the raw json that comes back in the compute response

@@ -14,40 +14,52 @@ rhino3dm().then((rhino) => {
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
-  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM5MjMxOTY2NzgsImV4cCI6MTYwMzkyODM4MDY3OCwicHJvamVjdElkIjoiNWY5OWVjMzI1NzQ3ZDUwMDA0MTc5ZDg4In0.44TwLr6y0AHLNQlLutLpXnz9kWqWJTBHulPweJb5d4k";
+  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDk5ODkyOTU1NjMsImV4cCI6MTYwOTk5NDQ3OTU2MywicHJvamVjdElkIjoiNWZmNjdjYTY5ZjNmODAwMDA0YWZhZjk0In0.TiC-WKkikNFbaOlJG_rqClpjVQqE-LNY4O3P2Hc4IM0";
 
 
   // Create Inputs
   let lineA = new rhino.Polyline(2); // Set number of edge points
-  lineA.add(18.9, -22.5, 2.9);
+  lineA.add(18.9, -22.5, 0);
   lineA.add(14.5, 19.2, 0);
+
+
+  let lineB = new rhino.Polyline(2); // Set number of edge points
+  lineB.add(18.9, -22.5, 5);
+  lineB.add(14.5, 19.2, 5);
 
   // Add Inputs
   swarmApp.addInput({
     type: "Curve",
-    name: "Crv",
+    name: "Curve A",
     values: [{ Value: lineA.toNurbsCurve().encode() }]
   });
-  console.log("INPUT", lineA.toNurbsCurve().encode());
+
+  swarmApp.addInput({
+    type: "Curve",
+    name: "Curve B",
+    values: [{ Value: lineB.toNurbsCurve().encode() }]
+  });
+  // console.log("INPUT", lineA.toNurbsCurve().encode());
   console.log("Inputs are set.  Running compute...")
   swarmApp.compute().then(output => {
 
-    console.log("Compute returned results!  Unpacking outputs...")
+    console.log("Compute returned results!  Unpacking outputs...", output)
 
     let val = output.outputList;
 
     //we know the results for this App are a single curve output parameter, containing a single item
     //start by parsing the raw json that comes back in the compute response
-    var resultCurveRawObject = JSON.parse(val[0].outputValue[0].data);
+    var resultLoftRawObject = JSON.parse(val[0].outputValue[0].data);
+    // console.log("resultLoftRawObject", resultLoftRawObject);
 
     //then decode that object into the proper rhino3dm type you are expecting
-    var resultRhinoCurve = rhino.CommonObject.decode(resultCurveRawObject);
-    console.log("Output Curve:", resultRhinoCurve);
+    var resultRhinoLoft = rhino.CommonObject.decode(resultLoftRawObject);
+    // console.log("Output Loft:", resultRhinoLoft);
 
     //now you can do whatever with the results --- its a nurbs curve!
-    console.log("Point on Output Curve at t=0", resultRhinoCurve.pointAt(0.0));
-    console.log("Point on Output Curve at t=0.5", resultRhinoCurve.pointAt(0.5));
-    console.log("Point on Output Curve at t=1", resultRhinoCurve.pointAt(1.0));
+    // console.log("Point on Output Curve at t=0", resultRhinoLoft.pointAt(0.0));
+    // console.log("Point on Output Curve at t=0.5", resultRhinoLoft.pointAt(0.5));
+    // console.log("Point on Output Curve at t=1", resultRhinoLoft.pointAt(1.0));
   });
 
 });
