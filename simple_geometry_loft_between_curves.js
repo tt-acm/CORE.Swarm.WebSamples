@@ -50,11 +50,14 @@ rhino3dm().then((rhino) => {
     //we know the results for this App are a single curve output parameter, containing a single item
     //start by parsing the raw json that comes back in the compute response
     var resultLoftRawObject = JSON.parse(val[0].outputValue[0].data);
-    // console.log("resultLoftRawObject", resultLoftRawObject);
+    console.log("resultLoftRawObject", resultLoftRawObject);
 
     //then decode that object into the proper rhino3dm type you are expecting
     var resultRhinoLoft = rhino.CommonObject.decode(resultLoftRawObject);
-    // console.log("Output Loft:", resultRhinoLoft);
+    console.log("Output Loft:", resultRhinoLoft.vertices().count);
+
+    let threeMesh = resultRhinoLoft.toThreejsJSON(true);
+    console.log("threeMesh", threeMesh);
 
     //now you can do whatever with the results --- its a nurbs curve!
     // console.log("Point on Output Curve at t=0", resultRhinoLoft.pointAt(0.0));
