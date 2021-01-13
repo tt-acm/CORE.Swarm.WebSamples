@@ -25,8 +25,9 @@ swarmApp.addInput({
 });
 
 // Sending to Swarm for compute
-swarmApp.compute().then(val => {
+swarmApp.compute().then(output => {
   // console.log("asynchronous logging has val:",val);
+  let val = output.outputList;
 
   val.forEach(v => {
     console.log("Output Name: ", v.name);

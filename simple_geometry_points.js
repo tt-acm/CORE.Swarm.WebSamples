@@ -43,7 +43,9 @@ rhino3dm().then((rhino) => {
     }]
   });
 
-  swarmApp.compute().then(val => {
+  swarmApp.compute().then(output => {
+
+    let val = output.outputList;
 
     val.forEach(v => {
       console.log("Output Name: ", v.name);

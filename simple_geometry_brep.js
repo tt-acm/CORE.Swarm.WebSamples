@@ -34,9 +34,11 @@ rhino3dm().then((rhino) => {
   })
 
   console.log("Inputs are set.  Running compute...")
-  swarmApp.compute().then(val => {
+  swarmApp.compute().then(output => {
 
     console.log("Compute returned results!  Unpacking outputs...")
+
+    let val = output.outputList;
 
     //we know the results for this App are a single curve output parameter, containing multiple curves
     //start by parsing the raw json that comes back in the compute response
