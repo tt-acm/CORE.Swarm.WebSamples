@@ -5,7 +5,7 @@ var Swarm = require('@ttcorestudio/swarm');
 var swarmApp = new Swarm();
 swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
-swarmApp.userId = "5da0c032997b8c000432e6bf";
+swarmApp.userId = "5e30091214c7ae0004f2fac2";
 swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTE5MzI2NjU0NDAsImV4cCI6MTYxMTkzNzg0OTQ0MCwicHJvamVjdElkIjoiNWYxMWFkYzk5ZjQzNmYwMDA0ZGU2YjliIn0.OZaxvOH4uKe42f98DWDRNkvlZz3Ebc6N66ozKFQo6Jc";
 
 // Add values to inputs
