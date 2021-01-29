@@ -1,5 +1,5 @@
-// This example simplify adds two numbers together
-// Swarm App: https://swarm.thorntontomasetti.com/app/5f998551dd6d710004c38ca4/info
+// This example creates a mesh sphere.
+// Swarm App: https://swarm.thorntontomasetti.com/app/5f11adc99f436f0004de6b9b/info
 
 var Swarm = require('@ttcorestudio/swarm');
 var swarmApp = new Swarm();
@@ -27,7 +27,6 @@ swarmApp.addInput({
 
 // Sending to Swarm for compute
 swarmApp.compute().then(output => {
-//   console.log("asynchronous logging has val:",output);
   let val = output.outputList;
 
   val.forEach(v => {
