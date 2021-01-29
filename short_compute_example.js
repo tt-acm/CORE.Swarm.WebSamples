@@ -5,16 +5,23 @@ var Swarm = require('@ttcorestudio/swarm');
 var swarmApp = new Swarm();
 swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
-swarmApp.userId = "5e14bcb6eac39955403ecc31";
-
-swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTEwODg0MTc0MzMsImV4cCI6MTYxMTA5MzYwMTQzMywicHJvamVjdElkIjoiNWUxNzg0NDg1YWMzMDcwMDA0ZTRjYzgwIn0.hAnESOLrSzuemTeNvr9gdL6477DymIgXQ4iG5jdcDyQ";
+swarmApp.userId = "5da0c032997b8c000432e6bf";
+swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTE5MzI2NjU0NDAsImV4cCI6MTYxMTkzNzg0OTQ0MCwicHJvamVjdElkIjoiNWYxMWFkYzk5ZjQzNmYwMDA0ZGU2YjliIn0.OZaxvOH4uKe42f98DWDRNkvlZz3Ebc6N66ozKFQo6Jc";
 
 // Add values to inputs
 swarmApp.addInput({
   type: "Slider",
-  name: "num",
+  name: "R",
   values: [{ // tree structure
     Value: 13
+  }]
+});
+
+swarmApp.addInput({
+  type: "Slider",
+  name: "UV",
+  values: [{ // tree structure
+    Value: 3
   }]
 });
 

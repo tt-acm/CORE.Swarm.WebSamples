@@ -5,29 +5,17 @@ var Swarm = require('@ttcorestudio/swarm');
 var swarmApp = new Swarm();
 swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
-swarmApp.userId = "5e14bcb6eac39955403ecc31";
+swarmApp.userId = "5da0c032997b8c000432e6bf";
 
-swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDI5NTg2Mzg4NTQsImV4cCI6MTYwMjk2MzgyMjg1NCwicHJvamVjdElkIjoiNWU5ZjY3NmNlMzhhYTIwMDA0NjUwY2YzIn0.d-kdnrqWs0GfanXI__uWeHt7HmKh9vCFD81-rX9qZJg";
+swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTE5MzY3MTE0MzgsImV4cCI6MTYxMTk0MTg5NTQzOCwicHJvamVjdElkIjoiNWVmMDY3YmVlYmE2YzA4MjFjZGRkMmU2In0.XpFDmH9_KVghshXOXmEsPUnYksDOlPqPoiGy2u4lKPA";
 
-// Add values to inputs
 swarmApp.addInput({
   type: "Slider",
-  name: "size",
+  name: "Snooze_ms",
   values: [{ // tree structure
-    Value: 13
+    Value: 1000
   }]
 });
-
-// swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTEwODg0MTc0MzMsImV4cCI6MTYxMTA5MzYwMTQzMywicHJvamVjdElkIjoiNWUxNzg0NDg1YWMzMDcwMDA0ZTRjYzgwIn0.hAnESOLrSzuemTeNvr9gdL6477DymIgXQ4iG5jdcDyQ";
-
-// // Add values to inputs
-// swarmApp.addInput({
-//   type: "Slider",
-//   name: "num",
-//   values: [{ // tree structure
-//     Value: 13
-//   }]
-// });
 
 
 // Sending to Swarm for compute
