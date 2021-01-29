@@ -13,7 +13,7 @@ swarmApp.addInput({
   type: "Slider",
   name: "Snooze_ms",
   values: [{ // tree structure
-    Value: 1000
+    Value: 10000
   }]
 });
 
