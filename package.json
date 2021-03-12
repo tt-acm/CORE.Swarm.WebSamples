@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/tt-acm/CORE.Swarm.WebSamples#readme",
   "dependencies": {
-    "@ttcorestudio/swarm": "^0.1.8",
+    "@ttcorestudio/swarm": "^0.1.14",
     "rhino3dm": "0.13.0"
   }
 }
