@@ -17,12 +17,12 @@ let inputB = new Swarm.Input("B", "Number");
 
 // Collect input values
 for (var i = 0; i < 3; i++) {
-    inputA.InnerTree.addData(i,{Value:i});
-    inputA.InnerTree.addData(i,{Value:10});
-
-    //inputB.InnerTree.addData(0,{Value:1000});
+    inputA.addDataTree(i,i);
+    inputA.addData(i);
 }
-inputB.InnerTree.addData(0,[{Value:1000}]); // Adding one branch of two item into input B
+inputB.addData(1000); // Adding one item to the first branch
+inputB.addData([1000,2000,3000]); // Adding an array to the first branch
+inputB.addDataTree(1, [1000,2000,3000]); // Adding an array to the SECOND branch
 
 // Collect inputs
 swarmApp.inputs.push(inputA);
