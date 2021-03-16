@@ -3,7 +3,6 @@
 
 var Swarm = require('@ttcorestudio/swarm');
 var swarmApp = new Swarm.SwarmApp();
-console.log("swarmapp", Swarm);
 swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
 swarmApp.logging = true;
@@ -32,8 +31,17 @@ swarmApp.inputs.push(inputB);
 // Sending to Swarm for compute
 swarmApp.compute().then(output => {
   if (output == null) return console.log("No compute result came back.");
-  // console.log("asynchronous logging has val:",val);
-  let val = output.outputList;
+  // console.log("asynchronous logging has val:",output);
+  let val = output.outputs;
+
+  console.log("There are " + val.length + " inputs in this compute");
+
+  let outputA = output.outputs[0];
+  console.log("Output A has " + outputA.branches.length + " branches");
+  let outputABranch2 = outputA.getDataTree(1);
+
+  console.log("Second branch of Output A contains following data: ", outputABranch2);
+
 
   val.forEach(v => {
     console.log("Output Name: ", v.name);
