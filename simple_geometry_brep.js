@@ -10,7 +10,7 @@ rhino3dm().then((rhino) => {
   console.log("Rhino3dm has loaded.  Constructing inputs...")
 
   //construct a new Swarm object
-  var swarmApp = new Swarm();
+  var swarmApp = new Swarm.SwarmApp();
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
@@ -20,43 +20,28 @@ rhino3dm().then((rhino) => {
   // Create Inputs
   let sphere = new rhino.Sphere([0,0,0], 15);
 
-  // Add Inputs
-  swarmApp.addInput({
-    type: "Brep",
-    name: "Brep",
-    values: [{ Value: sphere.toBrep().encode() }] // Object to create contour
-  });
 
-  swarmApp.addInput({
-    type: "Number",
-    name: "Num",
-    values: [{ Value: 5.0 }] // Contour distance
-  })
+  // Declare inputs first
+  let input_brep = new Swarm.Input("Brep", "Brep");
+  let input_contourDistance = new Swarm.Input("Num", "Number");
+
+  input_brep.addDataTree(0, sphere.toBrep().encode());
+  input_contourDistance.addDataTree(0, 5.0);
+
+  swarmApp.inputs.push(input_brep);
+  swarmApp.inputs.push(input_contourDistance);
+
 
   console.log("Inputs are set.  Running compute...")
+  // Sending to Swarm for compute
   swarmApp.compute().then(output => {
+    if (output == null) return console.log("No compute result came back.");
+    let val = output.outputs;
 
-    console.log("Compute returned results!  Unpacking outputs...")
+    console.log("There are " + val.length + " inputs in this compute");
 
-    let val = output.outputList;
-
-    //we know the results for this App are a single curve output parameter, containing multiple curves
-    //start by parsing the raw json that comes back in the compute response
-    console.log("Output Name: ", val[0].name);
-    // console.log("Output Value: ", v.outputValue);
-    val[0].outputValue.forEach(val => {// Fist compute output returns an array of curves
-      var resultCurveRawObject = JSON.parse(val.data);
-
-      //then decode that object into the proper rhino3dm type you are expecting
-      var resultRhinoCurve = rhino.CommonObject.decode(resultCurveRawObject);
-      console.log("Output Curve:", resultRhinoCurve);
-
-      //now you can do whatever with the results --- its a nurbs curve!
-      console.log("Point on Output Curve at t=0", resultRhinoCurve.pointAt(0.0));
-      console.log("Point on Output Curve at t=0.5", resultRhinoCurve.pointAt(0.5));
-      console.log("Point on Output Curve at t=1", resultRhinoCurve.pointAt(1.0));
-    })
-
+    let outputA = output.outputs[0];
+    console.log("Output A has " + outputA.branches.length + " branches", outputA.outputValue);
   });
 
 });

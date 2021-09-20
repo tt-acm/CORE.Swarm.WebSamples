@@ -10,7 +10,7 @@ rhino3dm().then((rhino) => {
   console.log("Rhino3dm has loaded.  Constructing inputs...")
 
   //construct a new Swarm object
-  var swarmApp = new Swarm();
+  var swarmApp = new Swarm.SwarmApp();
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
@@ -22,32 +22,23 @@ rhino3dm().then((rhino) => {
   lineA.add(18.9, -22.5, 2.9);
   lineA.add(14.5, 19.2, 0);
 
-  // Add Inputs
-  swarmApp.addInput({
-    type: "Curve",
-    name: "Crv",
-    values: [{ Value: lineA.toNurbsCurve().encode() }]
-  });
+
+  // Declare inputs first
+  let input_curve = new Swarm.Input("Crv", "Curve");
+  input_curve.addDataTree(0, lineA.toNurbsCurve().encode());
+  swarmApp.inputs.push(input_curve);
+
   console.log("INPUT", lineA.toNurbsCurve().encode());
   console.log("Inputs are set.  Running compute...")
+  // Sending to Swarm for compute
   swarmApp.compute().then(output => {
+    if (output == null) return console.log("No compute result came back.");
+    let val = output.outputs;
 
-    console.log("Compute returned results!  Unpacking outputs...")
+    console.log("There are " + val.length + " inputs in this compute");
 
-    let val = output.outputList;
-
-    //we know the results for this App are a single curve output parameter, containing a single item
-    //start by parsing the raw json that comes back in the compute response
-    var resultCurveRawObject = JSON.parse(val[0].outputValue[0].data);
-
-    //then decode that object into the proper rhino3dm type you are expecting
-    var resultRhinoCurve = rhino.CommonObject.decode(resultCurveRawObject);
-    console.log("Output Curve:", resultRhinoCurve);
-
-    //now you can do whatever with the results --- its a nurbs curve!
-    console.log("Point on Output Curve at t=0", resultRhinoCurve.pointAt(0.0));
-    console.log("Point on Output Curve at t=0.5", resultRhinoCurve.pointAt(0.5));
-    console.log("Point on Output Curve at t=1", resultRhinoCurve.pointAt(1.0));
+    let outputA = output.outputs[0];
+    console.log("Output A has " + outputA.branches.length + " branches", outputA);
   });
 
 });

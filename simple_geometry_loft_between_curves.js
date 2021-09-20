@@ -42,6 +42,7 @@ rhino3dm().then((rhino) => {
   // console.log("INPUT", lineA.toNurbsCurve().encode());
   console.log("Inputs are set.  Running compute...")
   swarmApp.compute().then(output => {
+    if (output == null) return console.log("No compute result came back.");
 
     console.log("Compute returned results!  Unpacking outputs...", output)
 
