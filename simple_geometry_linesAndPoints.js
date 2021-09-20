@@ -95,13 +95,13 @@ rhino3dm().then((rhino) => {
 
   //the actual compute call.  The val coming back in the promise is the collection of all Swarm App Outputs
   // Sending to Swarm for compute
-swarmApp.compute().then(output => {
-  if (output == null) return console.log("No compute result came back.");
-  let val = output.outputs;
+  swarmApp.compute().then(output => {
+    if (output == null) return console.log("No compute result came back.");
+    let val = output.outputs;
 
-  console.log("There are " + val.length + " inputs in this compute");
+    console.log("There are " + val.length + " inputs in this compute");
 
-  let outputA = output.outputs[0];
-  console.log("Output A has " + outputA.branches.length + " branches", outputA);
-});
+    let outputA = output.outputs[0];
+    console.log("Output A has " + outputA.branches.length + " branches", outputA);
+  });
 });

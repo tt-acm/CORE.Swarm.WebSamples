@@ -9,6 +9,9 @@ swarmApp.logging = true;
 
 swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM5MjExMTM0NzQsImV4cCI6MTYwMzkyNjI5NzQ3NCwicHJvamVjdElkIjoiNWY5OTg1NTFkZDZkNzEwMDA0YzM4Y2E0In0.2sg6y0d01zdnMaPwZdw3ICtkMAkapv8Ow8GGOLNCMds";
 
+// import { Input } from '@ttcorestudio/swarm';
+// let testInput = new Input();
+// console.log("testinpt", testInput);
 
 // Declare inputs first
 let inputA = new Swarm.Input("A", "Number");
@@ -21,7 +24,7 @@ for (var i = 0; i < 3; i++) {
 }
 inputB.addData(1000); // Adding one item to the first branch
 inputB.addData([1000,2000,3000]); // Adding an array to the first branch
-inputB.addDataTree(1, [1000,2000,3000]); // Adding an array to the SECOND branch
+inputB.addDataTree(1, 1); // Adding an array to the SECOND branch
 
 // Collect inputs
 swarmApp.inputs.push(inputA);
@@ -29,22 +32,13 @@ swarmApp.inputs.push(inputB);
 
 
 // Sending to Swarm for compute
-swarmApp.compute().then(output => {
+// Sending to Swarm for compute
+swarmApp.runLongCompute().then(output => {
   if (output == null) return console.log("No compute result came back.");
-  // console.log("asynchronous logging has val:",output);
   let val = output.outputs;
 
   console.log("There are " + val.length + " inputs in this compute");
 
   let outputA = output.outputs[0];
-  console.log("Output A has " + outputA.branches.length + " branches");
-  let outputABranch2 = outputA.getDataTree(1);
-
-  console.log("Second branch of Output A contains following data: ", outputABranch2);
-
-
-  val.forEach(v => {
-    console.log("Output Name: ", v.name);
-    console.log("Output Value: ", v.outputValue);
-  })
+  console.log("Output A has " + outputA.branches.length + " branches", outputA);
 });

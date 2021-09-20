@@ -10,22 +10,29 @@ swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTE5MzY3MTE0MzgsImV4cCI6MTYxMTk0MTg5NTQzOCwicHJvamVjdElkIjoiNWVmMDY3YmVlYmE2YzA4MjFjZGRkMmU2In0.XpFDmH9_KVghshXOXmEsPUnYksDOlPqPoiGy2u4lKPA";
 
 
+// swarmApp.addInput({
+//   type: "Slider",
+//   name: "Snooze_ms",
+//   values: [{ // tree structure
+//     Value: 1000
+//   }]
+// });
 // Declare inputs first
-let inputA = new Swarm.Input("Snooze_ms", "Slider");
-let inputB = new Swarm.Input("B", "Number");
+let input_snooze = new Swarm.Input("Snooze_ms", "Slider");
 
+input_snooze.addDataTree(0, 1000);
 
-inputA.addData(1000);
-
+swarmApp.inputs.push(input_snooze);
 
 
 // Sending to Swarm for compute
 swarmApp.runLongCompute().then(output => {
-  console.log("output", output.outputs[0].outputValue);
-  // let val = output.outputList;
+  if (output == null) return console.log("No compute result came back.");
+  let val = output.outputs;
 
-  // val.forEach(v => {
-  //   console.log("Output Name: ", v.name);
-  //   console.log("Output Value: ", v.outputValue);
-  // })
+  console.log("There are " + val.length + " inputs in this compute");
+
+  let outputA = output.outputs[0];
+  console.log("Output A has " + outputA.branches.length + " branches", outputA);
 });
+

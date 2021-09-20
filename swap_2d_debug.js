@@ -1,5 +1,5 @@
-// This example simplify adds two numbers together
-// Swarm App: https://swarm.thorntontomasetti.com/app/5f998551dd6d710004c38ca4/info
+// App Name: Swap 2d both app test 1
+// Swarm App: https://swarm.thorntontomasetti.com/app/60c23db76f061700047e315e/info
 
 var Swarm = require('@ttcorestudio/swarm');
 var swarmApp = new Swarm.SwarmApp();

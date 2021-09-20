@@ -12,7 +12,7 @@ rhino3dm().then(async function(rhino) {
   console.log("Rhino3dm has loaded.  Constructing inputs...")
 
   //construct a new Swarm object
-  var swarmApp = new Swarm();
+  var swarmApp = new Swarm.SwarmApp();
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
@@ -23,38 +23,33 @@ rhino3dm().then(async function(rhino) {
   let doc = rhino.File3dm.fromByteArray(arr);
   console.log("doc", doc);
 
+  // Declare inputs first
+  let input_mesh = new Swarm.Input("inputMesh", "Mesh");
+  
+
   let objects = doc.objects();
   for (let i = 0; i < objects.count; i++) {
     let mesh = objects.get(i).geometry();
     if (mesh instanceof rhino.Mesh) {
       console.log("mesh verticies", mesh.vertices().count);
       // Add Inputs
-      swarmApp.addInput({
-        type: "Mesh",
-        name: "inputMesh",
-        values: [{
-          Value: mesh.encode()
-        }] // Object to create contour
-      });
+      input_mesh.addDataTree(0, mesh.encode());
     }
   }
 
+  swarmApp.inputs.push(input_mesh);
+
 
   console.log("Inputs are set.  Running compute...")
+  // Sending to Swarm for compute
   swarmApp.compute().then(output => {
+    if (output == null) return console.log("No compute result came back.");
+    let val = output.outputs;
 
-    console.log("Compute returned results!  Unpacking outputs...")
+    console.log("There are " + val.length + " inputs in this compute");
 
-    let val = output.outputList;
-
-    //we know the results for this App is a single output that returns an array of points
-    //start by parsing the raw json that comes back in the compute response
-    // console.log("Output Value: ", v.outputValue);
-    val[0].outputValue.forEach(val => { // Fist compute output returns an array of points
-      var resultCurveRawObject = JSON.parse(val.data);
-      console.log("resultCurveRawObject", resultCurveRawObject);
-    })
-
+    let outputA = output.outputs[0];
+    console.log("Output A has " + outputA.branches.length + " branches", outputA);
   });
 
 });

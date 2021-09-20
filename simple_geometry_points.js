@@ -5,7 +5,7 @@ rhino3dm = require('rhino3dm');
 
 // Rhino needs to load up first before using.
 rhino3dm().then((rhino) => {
-  var swarmApp = new Swarm();
+  var swarmApp = new Swarm.SwarmApp();
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
@@ -25,32 +25,26 @@ rhino3dm().then((rhino) => {
     Z: 12.9
   };
 
-  // Add Inputs
-  swarmApp.addInput({
-    type: "Point",
-    name: "Pt",
-    values: [
-      { Value: pointA },
-      { Value: pointB }
-    ]
-  });
+  // Declare inputs first
+  let input_pts = new Swarm.Input("Pt", "Point");
+  let input_num = new Swarm.Input("Num", "Number");
 
-  swarmApp.addInput({
-    type: "Number",
-    name: "Num",
-    values: [{
-      Value: 13
-    }]
-  });
+  input_pts.addDataTree(0, [pointA, pointB]);
+  input_num.addDataTree(0, 13);
 
+  swarmApp.inputs.push(input_pts);
+  swarmApp.inputs.push(input_num);
+
+
+  // Sending to Swarm for compute
   swarmApp.compute().then(output => {
+    if (output == null) return console.log("No compute result came back.");
+    let val = output.outputs;
 
-    let val = output.outputList;
+    console.log("There are " + val.length + " inputs in this compute");
 
-    val.forEach(v => {
-      console.log("Output Name: ", v.name);
-      console.log("Output Value: ", v.outputValue);
-    })
+    let outputA = output.outputs[0];
+    console.log("Output A has " + outputA.branches.length + " branches", outputA);
   });
 
 });
