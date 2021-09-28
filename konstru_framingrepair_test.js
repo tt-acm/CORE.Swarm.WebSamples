@@ -44,8 +44,56 @@ rhino3dm().then((rhino) => {
   columnD.add(20, 20, 0);
   columnD.add(20,20, -20);
 
-  var encodedBeams = [beamA.toNurbsCurve().encode(), beamB.toNurbsCurve().encode(), beamC.toNurbsCurve().encode(), beamD.toNurbsCurve().encode()];
-  var encodedColumns = [columnA.toNurbsCurve().encode(), columnB.toNurbsCurve().encode(), columnC.toNurbsCurve().encode(), columnD.toNurbsCurve().encode()];
+  var encodedBeams = [
+    {
+        'value': beamA.toNurbsCurve().encode(),
+        'customAttributes': {
+            'KonstruID': "BeamA"
+        }
+    },
+    {
+        'value': beamB.toNurbsCurve().encode(),
+        'customAttributes': {
+            'KonstruID': "BeamB"
+        }
+    },
+    {
+        'value': beamC.toNurbsCurve().encode(),
+        'customAttributes': {
+            'KonstruID': "BeamC"
+        }
+    },{
+        'value': beamD.toNurbsCurve().encode(),
+        'customAttributes': {
+            'KonstruID': "BeamD"
+        }
+    }];
+
+
+    var encodedColumns = [
+        {
+            'value': columnA.toNurbsCurve().encode(),
+            'customAttributes': {
+                'KonstruID': "ColumnA"
+            }
+        },
+        {
+            'value': columnB.toNurbsCurve().encode(),
+            'customAttributes': {
+                'KonstruID': "ColumnB"
+            }
+        },
+        {
+            'value': columnC.toNurbsCurve().encode(),
+            'customAttributes': {
+                'KonstruID': "ColumnC"
+            }
+        },{
+            'value': columnD.toNurbsCurve().encode(),
+            'customAttributes': {
+                'KonstruID': "ColumnD"
+            }
+        }];
 
   // Declare inputs first
   let input_beam = new Swarm.Input("Beams", "Curve");
@@ -64,11 +112,11 @@ rhino3dm().then((rhino) => {
     if (output == null) return console.log("No compute result came back.");
     let val = output.outputs;
 
-    console.log("There are " + val.length + " inputs in this compute");
+    // console.log("There are " + val.length + " inputs in this compute");
 
-    let outputA = output.outputs[0];
-    console.log("Output A has " + outputA.branches.length + " branches", outputA);
-    console.log("Output A value: ", outputA.outputValue);
+    let outputA = output.outputs[2];
+    // console.log("Output A has " + outputA.branches.length + " branches", outputA);
+    console.log("Output A value: ", outputA.outputValue['{ 0; }'][0].attributes);
   });
 
 });
