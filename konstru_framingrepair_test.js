@@ -18,6 +18,9 @@ rhino3dm().then((rhino) => {
 
 
   // Create Inputs
+  // Convert Konstru element, by end point. Reconstruct new polylines of two endpoints using the konstru end points. (Kosntru element to Rhino polyline conversion)
+
+
   let beamA = new rhino.Polyline(2); // Set number of edge points
   beamA.add(0, 0, 0);
   beamA.add(20, 0, 0);
@@ -43,6 +46,8 @@ rhino3dm().then((rhino) => {
   let columnD = new rhino.Polyline(2); // Set number of edge points
   columnD.add(20, 20, 0);
   columnD.add(20,20, -20);
+
+//   var encodedBeams = [beamA.toNurbsCurve().encode(), beamB.toNurbsCurve().encode(), beamC.toNurbsCurve().encode(), beamD.toNurbsCurve().encode() ];
 
   var encodedBeams = [
     {
@@ -98,25 +103,26 @@ rhino3dm().then((rhino) => {
   // Declare inputs first
   let input_beam = new Swarm.Input("Beams", "Curve");
   let input_column= new Swarm.Input("Column", "Curve");
-  input_beam.addDataTree(0, encodedBeams);
-  input_column.addDataTree(0, encodedColumns);
+  input_beam.addData(encodedBeams);
+  input_column.addData(encodedColumns);
 
   swarmApp.inputs.push(input_beam);
   swarmApp.inputs.push(input_column);
 
-  console.log("INPUT:input_beam", input_beam);
-  console.log("INPUT:input_column", input_column);
-  console.log("Inputs are set.  Running compute...")
+//   console.log("INPUT:input_beam", input_beam);
+//   console.log("INPUT:input_column", input_column);
+//   console.log("Inputs are set.  Running compute...")
+
   // Sending to Swarm for compute
   swarmApp.compute().then(output => {
-    if (output == null) return console.log("No compute result came back.");
-    let val = output.outputs;
+    let outputA = output.outputs[0];
+    console.log("Output A has " + outputA.branches.length + " branches");
+    let outputABranch1 = outputA.getDataTree(0);
+         
 
-    // console.log("There are " + val.length + " inputs in this compute");
-
-    let outputA = output.outputs[2];
-    // console.log("Output A has " + outputA.branches.length + " branches", outputA);
-    console.log("Output A value: ", outputA.outputValue['{ 0; }'][0].attributes);
-  });
-
+    // //decode that curve object into the proper rhino3dm type you are expecting
+    var resultCurve1RawObject = JSON.parse(outputABranch1[0].data);   
+    var resultRhinoCurve1 = rhino.CommonObject.decode(resultCurve1RawObject);
+    console.log("resultrhino", resultRhinoCurve1.points().get(0), resultRhinoCurve1.points().get(1));
+});
 });
