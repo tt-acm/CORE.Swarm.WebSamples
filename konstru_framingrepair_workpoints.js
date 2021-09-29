@@ -1,5 +1,5 @@
-// This example runs framing repair for Konstru
-// Link to this Swarm App: https://swarm.thorntontomasetti.com/app/615332b1947d9c0004adf618/info
+// This example runs framing repair for Konstru. Pull nodes to workpoints within the tolerance.
+// Link to this Swarm App: https://swarm.thorntontomasetti.com/app/6154b9e140a7790004ab977e/info
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
 
