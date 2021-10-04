@@ -17,7 +17,9 @@ rhino3dm().then((rhino) => {
 
 
     // Create Inputs
-    // Convert Konstru element, by end point. Reconstruct new polylines of two endpoints using the konstru end points. (Kosntru element to Rhino polyline conversion)
+    // First, convert konstru grids into rhino.polyline with two end points
+    // For each grid line in grids, take the start& end points out from Konstru Grid. 
+    // Use the start&end points to create new Rhino.Polyline(2). We add it to an array of rhino.polylines, and feed it into the input "input_grids"
     let beamA = new rhino.Polyline(2); // Set number of edge points
     beamA.add(0, 0, 0);
     beamA.add(20, 0, 0);
@@ -33,6 +35,10 @@ rhino3dm().then((rhino) => {
 
   
     var encodedGrids = [beamA.toNurbsCurve().encode(), beamB.toNurbsCurve().encode(), beamC.toNurbsCurve().encode(), beamD.toNurbsCurve().encode() ];
+    
+    
+    // Second, for each elevation, we find out the height value, extract the double value from the height. 
+    // For example 0.0, 4.2, 8.5. In the end: [0.0, 4.2, 8.5]
     var elevation = [0, 20,40,60 ];
 
 
