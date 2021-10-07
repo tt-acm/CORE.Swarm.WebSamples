@@ -121,16 +121,18 @@ rhino3dm().then((rhino) => {
 
   // Sending to Swarm for compute
   swarmApp.compute().then(output => {
-    let outputA = output.outputs[0];
-    console.log("Output A has " + outputA.branches.length + " branches");
-    let outputABranch1 = outputA.getDataTree(0);
-         
+    let repaired_beams = output.outputs[0];
+    let repaired_columns = output.outputs[1];
+    // console.log("Output A has " + outputA.branches.length + " branches");
+    let beamsBranch1 = repaired_beams.getDataTree(0);
+    let columnsBranch1 = repaired_columns.getDataTree(0);         
 
-    // //decode that curve object into the proper rhino3dm type you are expecting
-    var resultCurve1RawObject = JSON.parse(outputABranch1[0].data);   
-    var resultRhinoCurve1 = rhino.CommonObject.decode(resultCurve1RawObject);
 
-    console.log("Object Attributes:", outputABranch1.map(d =>d.attributes.UserDictionary))
-    console.log("rhino result first line end points", resultRhinoCurve1.points().get(0), resultRhinoCurve1.points().get(1));
+    //decode that curve object into the proper rhino3dm type you are expecting
+    var beam1RawObject = JSON.parse(beamsBranch1[0].data);   
+    var resultBeamRhinoCurve1 = rhino.CommonObject.decode(beam1RawObject);
+
+    console.log("Object Attributes:", beamsBranch1.map(d =>d.attributes.UserDictionary))
+    console.log("rhino result first line end points", resultBeamRhinoCurve1.points().get(0), resultBeamRhinoCurve1.points().get(1));
 });
 });
