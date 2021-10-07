@@ -129,6 +129,8 @@ rhino3dm().then((rhino) => {
     // //decode that curve object into the proper rhino3dm type you are expecting
     var resultCurve1RawObject = JSON.parse(outputABranch1[0].data);   
     var resultRhinoCurve1 = rhino.CommonObject.decode(resultCurve1RawObject);
+
+    console.log("Object Attributes:", outputABranch1.map(d =>d.attributes.UserDictionary))
     console.log("rhino result first line end points", resultRhinoCurve1.points().get(0), resultRhinoCurve1.points().get(1));
 });
 });
