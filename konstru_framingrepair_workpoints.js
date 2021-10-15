@@ -14,7 +14,8 @@ rhino3dm().then((rhino) => {
 
     // Swarm retrieve project id from the token
     swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzI5NDI2ODMxNzgsImV4cCI6MTYzMjk0Nzg2NzE3OCwicHJvamVjdElkIjoiNjE1NGI5ZTE0MGE3NzkwMDA0YWI5NzdlIn0.xSwjyceXu4VeSKXhArDsszt0ukUwiR4NpZ1lCus4CvQ";
-
+    swarmApp.saveCompute = true;
+    swarmApp.userId = "5da0c032997b8c000432e6bf";
 
     // Create Inputs
     // Convert Konstru element, by end point. Reconstruct new polylines of two endpoints using the konstru end points. (Kosntru element to Rhino polyline conversion)
@@ -44,7 +45,31 @@ rhino3dm().then((rhino) => {
     columnD.add(20, 20, 0);
     columnD.add(20,20, -20);
 
-    var encodedBeams = [beamA.toNurbsCurve().encode(), beamB.toNurbsCurve().encode(), beamC.toNurbsCurve().encode(), beamD.toNurbsCurve().encode() ];
+    var encodedBeams = [
+        {
+            'value': beamA.toNurbsCurve().encode(),
+            'customAttributes': {
+                'KonstruID': "BeamA"
+            }
+        },
+        {
+            'value': beamB.toNurbsCurve().encode(),
+            'customAttributes': {
+                'KonstruID': "BeamB"
+            }
+        },
+        {
+            'value': beamC.toNurbsCurve().encode(),
+            'customAttributes': {
+                'KonstruID': "BeamC"
+            }
+        },{
+            'value': beamD.toNurbsCurve().encode(),
+            'customAttributes': {
+                'KonstruID': "BeamD"
+            }
+        }];
+    // var encodedBeams = [beamA.toNurbsCurve().encode(), beamB.toNurbsCurve().encode(), beamC.toNurbsCurve().encode(), beamD.toNurbsCurve().encode() ];
     var encodedColumns = [columnA.toNurbsCurve().encode(), columnB.toNurbsCurve().encode(), columnC.toNurbsCurve().encode(), columnD.toNurbsCurve().encode() ];
 
     let pointA = { X: 0.0, Y: 0.0, Z: 0.0 };
@@ -76,17 +101,19 @@ rhino3dm().then((rhino) => {
     //   console.log("Inputs are set.  Running compute...")
 
     // Sending to Swarm for compute
-    swarmApp.compute().then(output => {
+    swarmApp.runLongCompute().then(output => {
         let outputA = output.outputs[0];
         console.log("Output A has " + outputA.branches.length + " branches");
         let outputABranch1 = outputA.getDataTree(0);
            
+        console.log("outputABranch1", outputABranch1.length);
         outputABranch1.forEach(beam => {
             //decode that curve object into the proper rhino3dm type you are expecting
             var beamJsonObject = JSON.parse(beam.data);   
             var resultRhinoCurve = rhino.CommonObject.decode(beamJsonObject);
+            console.log("resultRhinoCurve", beam);
             // Points are formatted in format [x,y,z,weight]. We can ignore the weight value in our case.
-            console.log("Curve end points:", resultRhinoCurve.points().get(0), resultRhinoCurve.points().get(1));
+            // console.log("Curve end points:", resultRhinoCurve.points().get(0), resultRhinoCurve.points().get(1));
         })        
     });
 });
