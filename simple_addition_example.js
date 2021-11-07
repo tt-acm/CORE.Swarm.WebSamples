@@ -7,7 +7,7 @@ swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
 swarmApp.logging = true;
 
-swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDM5MjExMTM0NzQsImV4cCI6MTYwMzkyNjI5NzQ3NCwicHJvamVjdElkIjoiNWY5OTg1NTFkZDZkNzEwMDA0YzM4Y2E0In0.2sg6y0d01zdnMaPwZdw3ICtkMAkapv8Ow8GGOLNCMds";
+swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzYyNTAwMDkzODIsImV4cCI6MTYzNjI1NTE5MzM4MiwicHJvamVjdElkIjoiNWY5OTg1NTFkZDZkNzEwMDA0YzM4Y2E0In0.43Nk21NG8PGA6PiJ_UF3pW7VPWHHqht1hQTEzTOfKYo";
 
 
 // Declare inputs first
