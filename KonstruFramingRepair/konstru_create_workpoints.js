@@ -52,13 +52,9 @@ rhino3dm().then((rhino) => {
     swarmApp.inputs.push(input_grids);
     swarmApp.inputs.push(input_level);
 
-    //   console.log("INPUT:input_beam", input_beam);
-    //   console.log("INPUT:input_column", input_column);
-    //   console.log("Inputs are set.  Running compute...")
-
     // Sending to Swarm for compute
     swarmApp.compute().then(output => {
-        let outputA = output.outputs[0];
+        let outputA = output.outputs.filter(o => o.name.includes("Workpoint"))[0];
         console.log("Output A has " + outputA.branches.length + " branches");
         let outputABranch1 = outputA.getDataTree(0);
 

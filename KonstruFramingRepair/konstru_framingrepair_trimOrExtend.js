@@ -1,7 +1,9 @@
 // This example runs framing repair for Konstru
-// Link to this Swarm App: https://swarm.thorntontomasetti.com/app/615d113f265d4400043c37bb
+// Link to this Swarm App: https://swarm.thorntontomasetti.com/app/6197ca2c8f0e7700041e4108/info
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
+Swarm.userId = "5e30091214c7ae0004f2fac2";
+Swarm.saveCompute = true;
 
 // Rhino needs to load up first before using.
 console.log("Starting...")
@@ -14,7 +16,7 @@ rhino3dm().then((rhino) => {
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
-  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzM0ODk0NjgxMjMsImV4cCI6MTYzMzQ5NDY1MjEyMywicHJvamVjdElkIjoiNjE1ZDExM2YyNjVkNDQwMDA0M2MzN2JiIn0.bM3BCdy8-fxvKmemYAuIusBVjCibLKQ85cr2k1nbMYE";
+  swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzczNTAyMTI0MTksImV4cCI6MTYzNzM1NTM5NjQxOSwicHJvamVjdElkIjoiNjE5N2NhMmM4ZjBlNzcwMDA0MWU0MTA4In0.xtQQIacbjJxRg7x6u6O5XHs1ccBesc7997ecID5ylbI";
 
 
   // Create Inputs
@@ -47,6 +49,10 @@ rhino3dm().then((rhino) => {
   columnD.add(20, 20, 0);
   columnD.add(20,20, -20);
 
+  let braceA = new rhino.Polyline(2); // Set number of edge points
+  braceA.add(20, 20, 0);
+  braceA.add(0,0, -20);
+
 //   var encodedBeams = [beamA.toNurbsCurve().encode(), beamB.toNurbsCurve().encode(), beamC.toNurbsCurve().encode(), beamD.toNurbsCurve().encode() ];
 
   var encodedBeams = [
@@ -76,63 +82,74 @@ rhino3dm().then((rhino) => {
 
 
     var encodedColumns = [
-        {
-            'value': columnA.toNurbsCurve().encode(),
-            'customAttributes': {
-                'KonstruID': "ColumnA"
-            }
-        },
-        {
-            'value': columnB.toNurbsCurve().encode(),
-            'customAttributes': {
-                'KonstruID': "ColumnB"
-            }
-        },
-        {
-            'value': columnC.toNurbsCurve().encode(),
-            'customAttributes': {
-                'KonstruID': "ColumnC"
-            }
-        },{
-            'value': columnD.toNurbsCurve().encode(),
-            'customAttributes': {
-                'KonstruID': "ColumnD"
-            }
-        }];
+    {
+        'value': columnA.toNurbsCurve().encode(),
+        'customAttributes': {
+            'KonstruID': "ColumnA"
+        }
+    },
+    {
+        'value': columnB.toNurbsCurve().encode(),
+        'customAttributes': {
+            'KonstruID': "ColumnB"
+        }
+    },
+    {
+        'value': columnC.toNurbsCurve().encode(),
+        'customAttributes': {
+            'KonstruID': "ColumnC"
+        }
+    },{
+        'value': columnD.toNurbsCurve().encode(),
+        'customAttributes': {
+            'KonstruID': "ColumnD"
+        }
+    }];
+
+    var encodedBraces = [
+    {
+        'value': braceA.toNurbsCurve().encode(),
+        'customAttributes': {
+            'KonstruID': "BraceA"
+        }
+    }];
 
   // Declare inputs first
   let input_beam = new Swarm.Input("Beams", "Curve");
   let input_column= new Swarm.Input("Columns", "Curve");
-  let input_elevation= new Swarm.Input("Elevation", "Number");
+  let input_brace= new Swarm.Input("Braces", "Curve");
   let input_tolerance= new Swarm.Input("Tolerance", "Number");
+
   input_beam.addData(encodedBeams);
   input_column.addData(encodedColumns);
-  input_elevation.addData([0, 2000, 4000]);
-  input_tolerance.addData(20);
+  input_brace.addData(encodedBraces);
+  input_tolerance.addData(0.5);
 
   swarmApp.inputs.push(input_beam);
   swarmApp.inputs.push(input_column);
-  swarmApp.inputs.push(input_elevation);
+  swarmApp.inputs.push(input_brace);
   swarmApp.inputs.push(input_tolerance);
 
-//   console.log("INPUT:input_beam", input_beam);
-//   console.log("INPUT:input_column", input_column);
-//   console.log("Inputs are set.  Running compute...")
 
   // Sending to Swarm for compute
   swarmApp.compute().then(output => {
-    let repaired_beams = output.outputs[0];
-    let repaired_columns = output.outputs[1];
+    let repaired_beams = output.outputs.filter(o => o.name.includes("Repaired Beams"))[0];
+    let repaired_columns = output.outputs.filter(o => o.name.includes("Repaired Columns"))[0];
+    let repaired_braces = output.outputs.filter(o => o.name.includes("Repaired Braces"))[0];
     // console.log("Output A has " + outputA.branches.length + " branches");
     let beamsBranch1 = repaired_beams.getDataTree(0);
-    let columnsBranch1 = repaired_columns.getDataTree(0);         
+    let columnsBranch1 = repaired_columns.getDataTree(0); 
+    let bracesBranch1 = repaired_braces.getDataTree(0);  
+    console.log("brace1's attributes", bracesBranch1[0].attributes.UserDictionary);
+    console.log("beam1's attributes", beamsBranch1[0].attributes.UserDictionary);
 
 
     //decode that curve object into the proper rhino3dm type you are expecting
     var beam1RawObject = JSON.parse(beamsBranch1[0].data);   
     var resultBeamRhinoCurve1 = rhino.CommonObject.decode(beam1RawObject);
 
-    console.log("Object Attributes:", beamsBranch1.map(d =>d.attributes.UserDictionary))
-    console.log("rhino result first line end points", resultBeamRhinoCurve1.points().get(0), resultBeamRhinoCurve1.points().get(1));
+    var col1RawObject = JSON.parse(columnsBranch1[0].data);   
+    var resultcolRhinoCurve1 = rhino.CommonObject.decode(col1RawObject);
+    console.log(resultcolRhinoCurve1.toNurbsCurve().points().get(0))
 });
 });
