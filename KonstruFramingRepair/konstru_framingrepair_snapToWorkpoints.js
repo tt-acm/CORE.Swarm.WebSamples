@@ -103,15 +103,20 @@ rhino3dm().then((rhino) => {
     // Sending to Swarm for compute
     swarmApp.runLongCompute().then(output => {
         let outputA = output.outputs[0];
-        console.log("Output A has " + outputA.branches.length + " branches");
-        let outputABranch1 = outputA.getDataTree(0);
+        let repaired_beams = output.outputs.filter(o => o.name.includes("Repaired Beams"))[0];
+        let repaired_columns = output.outputs.filter(o => o.name.includes("Repaired Columns"))[0];
+        let repaired_braces = output.outputs.filter(o => o.name.includes("Repaired Braces"))[0];
+
+        // console.log("Output A has " + outputA.branches.length + " branches");
+        let outputBeamBranch1 = repaired_beams.getDataTree(0);
            
-        console.log("outputABranch1", outputABranch1.length);
-        outputABranch1.forEach(beam => {
+        console.log("outputABranch1", outputBeamBranch1.length);
+        outputBeamBranch1.forEach(beam => {
             //decode that curve object into the proper rhino3dm type you are expecting
+            console.log("beam.data", beam);
             var beamJsonObject = JSON.parse(beam.data);   
             var resultRhinoCurve = rhino.CommonObject.decode(beamJsonObject);
-            console.log("resultRhinoCurve", beam);
+            console.log("resultRhinoCurve", resultRhinoCurve.points().get(0));
             // Points are formatted in format [x,y,z,weight]. We can ignore the weight value in our case.
             // console.log("Curve end points:", resultRhinoCurve.points().get(0), resultRhinoCurve.points().get(1));
         })        
