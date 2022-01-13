@@ -3,7 +3,6 @@
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
 Swarm.userId = "5e30091214c7ae0004f2fac2";
-Swarm.saveCompute = true;
 
 // Rhino needs to load up first before using.
 console.log("Starting...")
@@ -13,6 +12,7 @@ rhino3dm().then((rhino) => {
 
   //construct a new Swarm object
   var swarmApp = new Swarm.SwarmApp();
+  swarmApp.saveCompute = true;
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
@@ -142,17 +142,19 @@ rhino3dm().then((rhino) => {
     // console.log("Output A has " + outputA.branches.length + " branches");
     let beamsBranch1 = repaired_beams.getDataTree(0);
     let columnsBranch1 = repaired_columns.getDataTree(0); 
-    let bracesBranch1 = repaired_braces.getDataTree(0);  
+    let bracesBranch1 = repaired_braces.getDataTree(0); 
+
+    console.log("beamsBranch1", beamsBranch1);
     console.log("brace1's attributes", bracesBranch1[0].attributes.UserDictionary);
     console.log("beam1's attributes", beamsBranch1[0].attributes.UserDictionary);
 
 
-    //decode that curve object into the proper rhino3dm type you are expecting
+    // decode that curve object into the proper rhino3dm type you are expecting
     var beam1RawObject = JSON.parse(beamsBranch1[0].data);   
     var resultBeamRhinoCurve1 = rhino.CommonObject.decode(beam1RawObject);
 
     var col1RawObject = JSON.parse(columnsBranch1[0].data);   
     var resultcolRhinoCurve1 = rhino.CommonObject.decode(col1RawObject);
-    console.log(resultcolRhinoCurve1.toNurbsCurve().points().get(0))
+    console.log(resultcolRhinoCurve1.points().get(0))
 });
 });

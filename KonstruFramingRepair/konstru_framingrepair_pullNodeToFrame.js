@@ -154,6 +154,6 @@ rhino3dm().then((rhino) => {
 
     var col1RawObject = JSON.parse(columnsBranch1[0].data);   
     var resultcolRhinoCurve1 = rhino.CommonObject.decode(col1RawObject);
-    console.log(resultcolRhinoCurve1.toNurbsCurve().points().get(0))
+    console.log(resultBeamRhinoCurve1)
 });
 });

@@ -2,8 +2,8 @@
 // Link to this Swarm App: https://swarm.thorntontomasetti.com/app/6197ca2c8f0e7700041e4108/info
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
-Swarm.userId = "5e30091214c7ae0004f2fac2";
-Swarm.saveCompute = true;
+// Swarm.userId = "5e30091214c7ae0004f2fac2";
+
 
 // Rhino needs to load up first before using.
 console.log("Starting...")
@@ -14,10 +14,10 @@ rhino3dm().then((rhino) => {
   //construct a new Swarm object
   var swarmApp = new Swarm.SwarmApp();
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
-
+  swarmApp.saveCompute = true;
   // Swarm retrieve project id from the token
   swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzczNTAyMTI0MTksImV4cCI6MTYzNzM1NTM5NjQxOSwicHJvamVjdElkIjoiNjE5N2NhMmM4ZjBlNzcwMDA0MWU0MTA4In0.xtQQIacbjJxRg7x6u6O5XHs1ccBesc7997ecID5ylbI";
-
+  swarmApp.userId = "5da0c032997b8c000432e6bf";
 
   // Create Inputs
   // Convert Konstru element, by end point. Reconstruct new polylines of two endpoints using the konstru end points. (Kosntru element to Rhino polyline conversion)
@@ -151,5 +151,7 @@ rhino3dm().then((rhino) => {
     var col1RawObject = JSON.parse(columnsBranch1[0].data);   
     var resultcolRhinoCurve1 = rhino.CommonObject.decode(col1RawObject);
     console.log(resultcolRhinoCurve1.toNurbsCurve().points().get(0))
+    console.log(resultcolRhinoCurve1)
+
 });
 });
