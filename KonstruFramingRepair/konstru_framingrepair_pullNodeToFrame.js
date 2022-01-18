@@ -3,7 +3,6 @@
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
 Swarm.userId = "5e30091214c7ae0004f2fac2";
-Swarm.saveCompute = true;
 
 // Rhino needs to load up first before using.
 console.log("Starting...")
@@ -13,11 +12,11 @@ rhino3dm().then((rhino) => {
 
   //construct a new Swarm object
   var swarmApp = new Swarm.SwarmApp();
+  swarmApp.saveCompute = true;
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
   // Swarm retrieve project id from the token
   swarmApp.appToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzczNTI5OTk4MTMsImV4cCI6MTYzNzM1ODE4MzgxMywicHJvamVjdElkIjoiNjE5ODAyYTNlODMwYTMwMDA0Y2NkNmYxIn0.4RG2NkU-ymxERfntB1Kv0hSzofhIfFUKI5XEIBiwNwo";
-
 
   // Create Inputs
   // Convert Konstru element, by end point. Reconstruct new polylines of two endpoints using the konstru end points. (Kosntru element to Rhino polyline conversion)

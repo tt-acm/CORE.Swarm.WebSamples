@@ -2,7 +2,6 @@
 // Link to this Swarm App: https://swarm.thorntontomasetti.com/app/615d113f265d4400043c37bb
 var Swarm = require('@ttcorestudio/swarm');
 rhino3dm = require('rhino3dm');
-Swarm.userId = "5e30091214c7ae0004f2fac2";
 
 // Rhino needs to load up first before using.
 console.log("Starting...")
@@ -12,6 +11,7 @@ rhino3dm().then((rhino) => {
 
   //construct a new Swarm object
   var swarmApp = new Swarm.SwarmApp();
+  swarmApp.userId = "5e30091214c7ae0004f2fac2";
   swarmApp.saveCompute = true;
   swarmApp.setDocument(8, 0.001); // Set Document unit and tolerance
 
