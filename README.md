@@ -4,6 +4,8 @@ SDK samples deomnstrating how to call into the external Swarm Compute API from a
 This repo serves as both a learning resource for CORE studio web development teams needing to call into Swarm, and a development environment to iteratively improve the Swarm NPM package.
 
 ## Getting Started
+**Check out Swarm SDK Documentation: https://github.com/tt-acm/CORE.Swarm.jspkg/wiki/How-to-use-the-Swarm-Javascript-SDK**
+
 1. Clone this repo.
 2. Run `npm install` in a terminal at the project root directory.  Make sure you're signed in to NPM to get access to the private [@ttcorestudio/swarm](https://www.npmjs.com/package/@ttcorestudio/swarm) NPM package.
 3. Run `node <file_name>` pointing at one of the example files in a terminal.  The examples all `console.log()` the results that come back from Swarm.
