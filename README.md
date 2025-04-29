@@ -1,3 +1,5 @@
+***This project is no longer maintained***
+
 # CORE.Swarm.WebSamples
 SDK samples deomnstrating how to call into the external Swarm Compute API from a node.js app using the [CORE.Swarm.jspkg](https://github.com/tt-acm/CORE.Swarm.jspkg) and [rhino3dm](https://github.com/mcneel/rhino3dm) NPM packages.
 
